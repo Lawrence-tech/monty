@@ -15,7 +15,7 @@ void stack_push(stack_t **head, unsigned int l_num, char *str)
 
 	if (!str || !isdigit(*str))
 	{
-		dprintf(2, "L%u: Usage: push integer\n", l_num);
+		fprintf(stderr, "L%u: Usage: push integer\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
@@ -23,7 +23,7 @@ void stack_push(stack_t **head, unsigned int l_num, char *str)
 	new_node = malloc(sizeof(stack_t));
 	if (new_node)
 	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
@@ -71,7 +71,7 @@ void stack_pint(stack_t **head, unsigned int l_num)
 	}
 	else
 	{
-		dprintf(2, "L%u: can't pint, stack empty\n", l_num);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
@@ -93,7 +93,7 @@ void stack_pop(stack_t **head, unsigned int l_num)
 	}
 	else
 	{
-		dprintf(2, "L%u: can't pop an empty stack\n", l_num);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
@@ -110,7 +110,7 @@ void stack_swap(stack_t **head, unsigned int l_num)
 
 	if (*head == NULL || (*head)->next == NULL)
 	{
-		dprintf(2, "L%u: can't swap, stack too short\n", l_num);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}

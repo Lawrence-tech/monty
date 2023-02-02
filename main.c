@@ -1,4 +1,8 @@
+#define _GNU_SOURCE
 #include "monty.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 /**
   *init - initialize all variables in struct and keep values
@@ -26,13 +30,13 @@ FILE *check_open(int argc, char **argv)
 
 	if (argc == 1 || argc > 2)
 	{
-		dprintf(STDERR_FILENO, "Usage: monty file\n");
+		fprintf(stderr, "Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -63,7 +67,7 @@ int main(int argc, char **argv)
 			f = get_opcode_func(args[0]);
 			if (!f)
 			{
-				dprintf(2, "L%u: unkown instruction%s\n",
+				fprintf(stderr, "L%u: unkown instruction%s\n",
 						vars.cline, args[0]);
 				free_vars();
 				exit(EXIT_FAILURE);
