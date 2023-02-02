@@ -11,18 +11,16 @@ void stack_push(stack_t **head, unsigned int l_num)
 
 	if (!vars.stack)
 	{
-		dprintf(2, "L%u: ", l_num);
-		dprintf(2, "Usage: push integer\n");
+		dprintf(2, "L%u: Usage: push integer\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
 
 	while (vars.stack[i] != '\0')
 	{
-		if ((!(isdigit(vars.stack[i]))) && vars.stack[i] != '-')
+		if (!isdigit(vars.stack[i]) && vars.stack[i] != '-')
 		{
-			dprintf(2, "L%u: ", l_num);
-			dprintf(2, "Usage: push integer\n");
+			dprintf(2, "L%u: Usage: push integer\n", l_num);
 			free_vars();
 			exit(EXIT_FAILURE);
 		}
@@ -36,7 +34,7 @@ void stack_push(stack_t **head, unsigned int l_num)
 }
 
 /**
-  *stack_pall - rints all the values on the stack.
+  *stack_pall - prints all the values on the stack.
   *@head: list head.
   *@l_num: reading line
   */
@@ -63,8 +61,7 @@ void stack_pint(stack_t **head, unsigned int l_num)
 {
 	if (*head == NULL)
 	{
-		dprintf(2, "L%u: ", l_num);
-		dprintf(2, "can't pint, stack empty\n");
+		dprintf(2, "L%u: can't pint, stack empty\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
@@ -82,7 +79,7 @@ void stack_pop(stack_t **head, unsigned int l_num)
 
 	if (*head == NULL)
 	{
-		dprintf(2, "L%u: can't open an empty stack\n", l_num);
+		dprintf(2, "L%u: can't pop an empty stack\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
@@ -98,17 +95,9 @@ void stack_pop(stack_t **head, unsigned int l_num)
   */
 void stack_swap(stack_t **head, unsigned int l_num)
 {
-	int nel = 0;
 	stack_t *tmp = NULL;
 
-	tmp = *head;
-
-	while (tmp != NULL)
-	{
-		nel++;
-		tmp = tmp->next;
-	}
-	if (nel < 2)
+	if (*head == NULL || (*head)->next == NULL)
 	{
 		dprintf(2, "L%u: can't swap, stack too short\n", l_num);
 		free_vars();
