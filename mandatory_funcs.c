@@ -122,3 +122,14 @@ void stack_swap(stack_t **head, unsigned int l_num)
 	(*head)->next = tmp;
 	(*head)->prev = NULL;
 }
+
+/**
+  *stack_nop - does nothing
+  *@head: pointer to the head of stack
+  *@l_num: line number of command.
+  */
+void stack_nop(stack_t **head unsigned int l_num)
+{
+	(void) head;
+	(void) l_num;
+}
