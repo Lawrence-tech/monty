@@ -60,7 +60,7 @@ typedef struct global_variables
 extern global_t vars;
 void (*get_opcode_func(char *s))(stack_t **head, unsigned int l_num);
 stack_t *add_dnodeint(stack_t **head, const int n);
-stack_t *add_dnodeint_end(stack **head, const int n);
+stack_t *add_dnodeint_end(stack_t **head, const int n);
 void free_vars(void);
 void free_stack(stack_t *head);
 void stack_push(stack_t **head, unsigned int l_num);
@@ -75,7 +75,7 @@ void stack_div(stack_t **head, unsigned int l_num);
 void stack_mul(stack_t **head, unsigned int l_num);
 void stack_mod(stack_t **head, unsigned int l_num);
 void stack_pchar(stack_t **head, unsigned int l_num);
-void stack_pstr(tack_t **head, unsigned int l_num);
+void stack_pstr(stack_t **head, unsigned int l_num);
 void stack_queue(stack_t **head, unsigned int l_num);
 void order_stack(stack_t **head, unsigned int l_num);
 FILE *check_open(int argc, char **argv);

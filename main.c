@@ -74,7 +74,7 @@ int main(int argc, char **argv)
 			vars.stack = strtok(NULL, "\n\t");
 			f(&vars.head, vars.cline);
 		}
-		l_numv = getline(&vars.buffer, &size, fd);
+		l_num = getline(&vars.buffer, &size, fd);
 		vars.cline++;
 	}
 
