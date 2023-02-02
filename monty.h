@@ -63,7 +63,7 @@ stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
 void free_vars(void);
 void free_stack(stack_t *head);
-void stack_push(stack_t **head, unsigned int l_num);
+void stack_push(stack_t **head, unsigned int l_num, char *str);
 void stack_pall(stack_t **head, unsigned int l_num);
 void stack_pint(stack_t **head, unsigned int l_num);
 void stack_pop(stack_t **head, unsigned int l_num);
@@ -80,9 +80,5 @@ void stack_queue(stack_t **head, unsigned int l_num);
 void order_stack(stack_t **head, unsigned int l_num);
 FILE *check_open(int argc, char **argv);
 void init(FILE *fd);
-
-
-
-
 
 #endif /*MONTY_H*/

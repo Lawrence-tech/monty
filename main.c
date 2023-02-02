@@ -1,7 +1,5 @@
 #include "monty.h"
 
-global_t vars;
-
 /**
   *init - initialize all variables in struct and keep values
   *@fd: file descriptor
@@ -28,13 +26,13 @@ FILE *check_open(int argc, char **argv)
 
 	if (argc == 1 || argc > 2)
 	{
-		dprintf(2, "Usage: monty file\n");
+		dprintf(STDERR_FILENO, "Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
 	{
-		dprintf(2, "Error: can't open file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	return (fd);
@@ -60,14 +58,13 @@ int main(int argc, char **argv)
 	while (l_num != -1)
 	{
 		args[0] = strtok(vars.buffer, "\n\t");
-		if (args[0][0] != '#' && args[0])
+		if (args[0] && args[0][0] != '#')
 		{
 			f = get_opcode_func(args[0]);
 			if (!f)
 			{
-				dprintf(2, "L%u: ", vars.cline);
-				dprintf(2, "unkown instruction %s\n",
-						args[0]);
+				dprintf(2, "L%u: unkown instruction%s\n",
+						vars.cline, args[0]);
 				free_vars();
 				exit(EXIT_FAILURE);
 			}
