@@ -53,7 +53,7 @@ typedef struct global_variables
 	FILE *fd;
 	unsigned int cline;
 	char *buffer;
-	char *stack;
+	stack_t *stack;
 	stack_t *head;
 } global_t;
 
