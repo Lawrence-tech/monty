@@ -18,9 +18,9 @@ void stack_push(stack_t **head, unsigned int l_num)
 		exit(EXIT_FAILURE);
 	}
 
-	while (vars.stack[i] != '\0')
+	while (vars.stack[i] != NULL)
 	{
-		if (!isdigit(vars.stack[i]) && vars.stack[i] != '-')
+		if (!isdigit((int)vars.stack[i]) && vars.stack[i] != '-')
 		{
 			dprintf(2, "L%u: Usage: push integer\n", l_num);
 			free_vars();
