@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 				free_vars();
 				exit(EXIT_FAILURE);
 			}
-			vars.stack = strtok(NULL, "\n\t");
+			args[1] = strtok(NULL, "\n\t");
 			f(&vars.head, vars.cline);
 		}
 		l_num = getline(&vars.buffer, &size, fd);
