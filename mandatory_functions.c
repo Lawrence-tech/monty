@@ -80,7 +80,7 @@ void stack_pop(stack_t **head, unsigned int l_num)
 {
 	stack_t *tmp;
 
-	if (head == NULL || *head == NULL)
+	if (*head == NULL)
 	{
 		dprintf(2, "L%u: can't open an empty stack\n", l_num);
 		free_vars();
@@ -99,7 +99,7 @@ void stack_pop(stack_t **head, unsigned int l_num)
 void stack_swap(stack_t **head, unsigned int l_num)
 {
 	int nel = 0;
-	stack_t *tmp == NULL;
+	stack_t *tmp = NULL;
 
 	tmp = *head;
 
@@ -122,25 +122,4 @@ void stack_swap(stack_t **head, unsigned int l_num)
 	(*head)->next = tmp;
 	(*head)->prev = NULL;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
