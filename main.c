@@ -22,7 +22,7 @@ void init(FILE *fd)
   *@argv: vector
   *Return: fd of file opened. -1 if it doesn't exit.
   */
-FILE *chack_open(int argc, char **argv)
+FILE *check_open(int argc, char **argv)
 {
 	FILE *fd;
 
