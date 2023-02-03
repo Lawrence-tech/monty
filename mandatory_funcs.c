@@ -21,7 +21,7 @@ void stack_push(stack_t **head, unsigned int l_num, char *str)
 	}
 	value = atoi(str);
 	new_node = malloc(sizeof(stack_t));
-	if (new_node)
+	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_vars();
