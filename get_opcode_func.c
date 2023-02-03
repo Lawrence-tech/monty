@@ -7,23 +7,22 @@
   *@s: input opcode
   *Return: a pointer to the func given the opcode. Null if none.
   */
-void (*get_opcode_func(char *s))(stack_t **head, unsigned int l_num)
+void (*get_opcode_func(char *s))(stack_t **head, unsigned int l_num, char *)
 {
-	int i = 0;
 	instruction_t stack[] = {
 		{"push", stack_push},
 		{"pall", stack_pall},
 		{"pint", stack_pint},
+		{"pop", stack_pop},
+		{"add", stack_add},
 		{"swap", stack_swap},
 		{"nop", stack_nop},
 		{NULL, NULL}
 	};
+	int i;
 
-	while (stack[i].opcode)
-	{
-		if (strcmp(stack[i].opcode, s) == 0)
-			break;
-		i += 1;
-	}
-	return (stack[i].f);
+	for (i = 0; stack[i].opcode != NULL; i++)
+		if (!strcmp(stack[i].opcode, s))
+			return (stack[i].f);
+	return (NULL);
 }
