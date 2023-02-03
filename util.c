@@ -1,10 +1,10 @@
-#include "monty"
+#include "monty.h"
 
 /**
   *free_stack - frees the double linked list
   *@head: pointer to the head of the stack
   */
-void free_stack(stack_t **head)
+void free_stack(stack_t *head)
 {
 	stack_t *next;
 
