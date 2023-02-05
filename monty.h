@@ -1,6 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#define _POSIX_C_SOURCE 200809L
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,7 +59,7 @@ typedef struct global_variables
 } global_t;
 
 extern global_t vars;
-void (*get_opcode_func(char *s))(stack_t **head, unsigned int l_num);
+void get_opcode_func(stack_t **head, unsigned int l_num, char *);
 stack_t *add_dnodeint(stack_t **head, const int n);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
 void free_vars(void);

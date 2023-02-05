@@ -7,7 +7,7 @@
   *@s: input opcode
   *Return: a pointer to the func given the opcode. Null if none.
   */
-void (*get_opcode_func(char *s))(stack_t **head, unsigned int l_num, char *)
+void get_opcode_func(stack_t **head, unsigned int l_num, char *)
 {
 	instruction_t stack[] = {
 		{"push", stack_push},

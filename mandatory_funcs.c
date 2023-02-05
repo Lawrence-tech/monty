@@ -8,7 +8,7 @@
   *@head: pointer to the head of the stack.
   *@l_num: line number of the command
   */
-void stack_push(stack_t **head, unsigned int l_num, char *str)
+/** void stack_push(stack_t **head, unsigned int l_num)
 {
 	stack_t *new_node = NULL;
 	int value = 0;
@@ -40,7 +40,7 @@ void stack_push(stack_t **head, unsigned int l_num, char *str)
 	}
 	*head = new_node;
 }
-
+**/
 /**
   *stack_pall - prints all the values on the stack, starting from the top.
   *@head: pointer to the head of the stack.
