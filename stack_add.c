@@ -19,7 +19,7 @@ void stack_add(stack_t **head, unsigned int l_num)
 	if (nel < 2)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", l_num);
-		free_vars90;
+		free_vars();
 		exit(EXIT_FAILURE);
 	}
 	tmp = (*head)->next;
