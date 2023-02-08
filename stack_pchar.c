@@ -13,7 +13,7 @@ void stack_pchar(stack_t **head, unsigned int l_num)
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
-	if ((*head)->n < 0 || (*head)-> >= 128)
+	if ((*head)->n < 0 || (*head)->n >= 128)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of ranger\n", l_num);
 		free_vars();
