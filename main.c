@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-extern global_t vars;
+global_t vars;
 /**
   *init - initialize all variables in struct and keep values
   *@fd: file descriptor
