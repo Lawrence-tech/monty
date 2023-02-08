@@ -11,7 +11,7 @@
 void stack_push(stack_t **head, unsigned int l_num)
 {
 	int number;
-	char *str = vars.stack;
+	stack_t *str = vars.stack;
 	int i = 0;
 
 	if (!str)
