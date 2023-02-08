@@ -28,10 +28,12 @@ void (*get_opcode(char *opc))(stack_t **head, unsigned int l_num)
 		{"pstr", stack_pstr},
 		{NULL, NULL}
 	};
-	int i;
 
-	for (i = 0; stack[i].opcode != NULL; i++)
-		if (!strcmp(stack[i].opcode, opc))
-			return (stack[i].f);
-	return (NULL);
+	while (stack[i].opcode)
+	{
+		if (strcmp(stack[i].opcode, opc) == 0)
+			break;
+		i += 1;
+	}
+	return (stack[i].f);
 }
