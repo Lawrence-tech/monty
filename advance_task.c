@@ -6,7 +6,7 @@
   *@head: pointer to the head of stack
   *@l_num: line number of command
   */
-void stack_sub(stack_t **head, unisigned int l_num)
+void stack_sub(stack_t **head, unsigned int l_num)
 {
 	stack_t *tmp = NULL;
 	int nel = 0;
