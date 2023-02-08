@@ -2,8 +2,8 @@
 
 /**
   *get_opcode - get the option of char input to perform the opcode
-  *@head: pointer to the head of the stack
-  *@l_num: line number of command.
+  *head: pointer to the head of the stack
+  *l_num: line number of command.
   *@opc: opcode passed.
   *Return: a pointer to the func given the opcode. Null if none.
   */
