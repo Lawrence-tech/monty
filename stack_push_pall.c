@@ -11,31 +11,28 @@
 void stack_push(stack_t **head, unsigned int l_num)
 {
 	int number;
-	stack_t *str = vars.stack;
-	int i = 0;
+	stack_t *temp = vars.stack;
+	char str[100];
 
-	if (!str)
+	if (!temp)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
 
-	while (str[i])
+	sprintf(str, "%d", temp->n);
+	if (!isdigit(*str) && *str != '-')
 	{
-		if (!isdigit(str[i]) && str[i] != '-')
-		{
-			fprintf(stderr, "L%u: usage: push integer\n", l_num);
-			free_vars();
-			exit(EXIT_FAILURE);
-		}
-		i++;
+		fprintf(stderr, "L%u: usage: push integer\n", l_num);
+		free_vars();
+		exit(EXIT_FAILURE);
 	}
 
 	number = atoi(str);
 	if (vars.order == 1)
 		add_dnodeint(head, number);
-else
+	else
 	add_dnodeint_end(head, number);
 }
 
