@@ -1,14 +1,15 @@
 #include "monty.h"
 
 /**
-  *get_opcode_func - get the option of char input to perform the opcode
+  *get_opcode - get the option of char input to perform the opcode
   *@head: pointer to the head of the stack
   *@l_num: line number of command.
-  *input opcode
+  *@opc: opcode passed.
   *Return: a pointer to the func given the opcode. Null if none.
   */
-void get_opcode_func(stack_t **head, unsigned int l_num)
+void (*get_opcode(char *opc))(stack_t **head, unsigned int l_num)
 {
+	int i = 0;
 	instruction_t stack[] = {
 		{"push", stack_push},
 		{"pall", stack_pall},
@@ -17,12 +18,20 @@ void get_opcode_func(stack_t **head, unsigned int l_num)
 		{"add", stack_add},
 		{"swap", stack_swap},
 		{"nop", stack_nop},
+		{"sub", stack_sub},
+		{"div", stack_div},
+		{"mul", stack_mul},
+		{"mod", stack_mod},
+		{"queue", stack_queue},
+		{"stack", order_stack},
+		{"pchar", stack_pchar},
+		{"pstr", stack_pstr},
 		{NULL, NULL}
 	};
 	int i;
 
 	for (i = 0; stack[i].opcode != NULL; i++)
-		if (!strcmp(stack[i].opcode, s))
+		if (!strcmp(stack[i].opcode, opc))
 			return (stack[i].f);
 	return (NULL);
 }

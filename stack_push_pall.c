@@ -10,35 +10,33 @@
   */
 void stack_push(stack_t **head, unsigned int l_num)
 {
-	stack_t *new_node = NULL;
-	int value = 0;
+	int number;
+	char *str = vars.stack;
+	int i = 0;
 
-	if (!str || !isdigit(*str))
+	if (!str)
 	{
-		fprintf(stderr, "L%u: Usage: push integer\n", l_num);
+		fprintf(stderr, "L%u: usage: push integer\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
-	value = atoi(str);
-	new_node = malloc(sizeof(stack_t));
-	if (!new_node)
+
+	while (str[i])
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		free_vars();
-		exit(EXIT_FAILURE);
+		if (!isdigit(str[i]) && str[i] != '-')
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", l_num);
+			free_vars();
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
-	new_node->n = value;
-	new_node->prev = NULL;
-	if (*head)
-	{
-		new_node->next = *head;
-		(*head)->prev = new_node;
-	}
-	else
-	{
-		new_node->next = NULL;
-	}
-	*head = new_node;
+
+	number = atoi(str);
+	if (vars.order == 1)
+		add_dnodeint(head, number);
+else
+	add_dnodeint_end(head, number);
 }
 
 /**

@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
-  *free_stack - frees the double linked list
+  *free_stack - function to free list(double linked).
   *@head: pointer to the head of the stack
   */
 void free_stack(stack_t *head)
@@ -17,14 +17,4 @@ void free_stack(stack_t *head)
 		head = next;
 	}
 	free(head);
-}
-
-/**
-  *free_vars - frees all variables in the struct global
-  */
-void free_vars(void)
-{
-	free_stack(vars.head);
-	free(vars.buffer);
-	fclose(vars.fd);
 }

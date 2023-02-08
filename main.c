@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+extern global_t vars;
 /**
   *init - initialize all variables in struct and keep values
   *@fd: file descriptor
@@ -64,7 +65,7 @@ int main(int argc, char **argv)
 		args[0] = strtok(vars.buffer, "\n\t");
 		if (args[0] && args[0][0] != '#')
 		{
-			f = get_opcode_func(args[0]);
+			f = get_opcode(args[0]);
 			if (!f)
 			{
 				fprintf(stderr, "L%u: unkown instruction%s\n",
