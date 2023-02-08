@@ -19,7 +19,7 @@ void stack_sub(stack_t **head, unsigned int l_num)
 	}
 	if (nel < 2)
 	{
-		fprintf(stderr, "L%u: cant sub, stack too short\n", l_num);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", l_num);
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
