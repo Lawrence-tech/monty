@@ -64,7 +64,7 @@ void stack_div(stack_t **head, unsigned int l_num)
 		exit(EXIT_FAILURE);
 	}
 	tmp = (*head)->next;
-	tmp->n = (int)(tmp->n) / (head)->n;
+	tmp->n = (int)(tmp->n) / (*head)->n;
 	stack_pop(head, l_num);
 }
 
@@ -125,6 +125,6 @@ void stack_mod(stack_t **head, unsigned int l_num)
 		exit(EXIT_FAILURE);
 	}
 	tmp = (*head)->next;
-	tmp->n = (int)(tmp->n) % (head)->n;
+	tmp->n = (int)(tmp->n) % (*head)->n;
 	stack_pop(head, l_num);
 }
