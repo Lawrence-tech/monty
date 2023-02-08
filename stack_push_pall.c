@@ -16,7 +16,8 @@ void stack_push(stack_t **head, unsigned int l_num)
 
 	if (!temp)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", l_num);
+		fprintf(stderr, "L%u: ", l_num);
+		fprintf(stderr, "usage: push integer\n");
 		free_vars();
 		exit(EXIT_FAILURE);
 	}
