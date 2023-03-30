@@ -1,25 +1,21 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef MONTYH
+#define MONTYH
 
-#define _POSIX_C_SOURCE 200809L
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <ctype.h>
+
+#define STACKMODE 0
+#define QUEUEMODE 1
 
 /**
-  *struct stack_s - doubly linked list representatin of a stack/queue
-  *@n: integer
-  *@prev: pointer to previous element of stack/queue
-  *@next: pointer to next element
-  *Description: doubly linked list node structure for stack, queue
-  *LIFO, FIFO
-  */
+ * struct stack_s - doubly linked list representation of a stack (or queue)
+ * @n: integer
+ * @prev: points to the previous element of the stack (or queue)
+ * @next: points to the next element of the stack (or queue)
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 typedef struct stack_s
 {
 	int n;
@@ -28,58 +24,60 @@ typedef struct stack_s
 } stack_t;
 
 /**
-  *struct instruction_s - opcode and its function
-  *@opcode: the opcode
-  *@f: function to handle the opcode
-  *Description: opcode and its function for stack,queue. LIFO,FIFO
-  */
+ * struct instruction_s - opcoode and its function
+ * @opcode: the opcode
+ * @f: function to handle the opcode
+ *
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
 typedef struct instruction_s
 {
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
-  *struct global_variables - global var to initialize
-  *@order: mode
-  *@fd: file description
-  *@buffer: pointer data allocater for each line
-  *@head: head of list(stack)
-  *@stack: stack
-  *@cline: line counter
-  */
-typedef struct global_variables
+union montyfunctype
 {
-	int order;
-	FILE *fd;
-	unsigned int cline;
+	void (*toponly)(stack_t **top);
+	void (*pushmode)(stack_t **top, stack_t **bot, int val, int mode);
+	void (*topbot)(stack_t **top, stack_t **bot);
+};
+
+typedef struct optype
+{
+	char *opcode;
+	union montyfunctype func;
+} optype;
+
+typedef struct montyglob
+{
 	char *buffer;
-	stack_t *stack;
-	stack_t *head;
-} global_t;
+	unsigned long linenum;
+	FILE* script;
+} montyglob;
 
-extern global_t vars;
-void (*get_opcode(char *opc))(stack_t **head, unsigned int l_num);
-stack_t *add_dnodeint(stack_t **head, const int n);
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-void free_vars(void);
-void free_stack(stack_t *head);
-void stack_push(stack_t **head, unsigned int l_num);
-void stack_pall(stack_t **head, unsigned int l_num);
-void stack_pint(stack_t **head, unsigned int l_num);
-void stack_pop(stack_t **head, unsigned int l_num);
-void stack_add(stack_t **head, unsigned int l_num);
-void stack_swap(stack_t **head, unsigned int l_num);
-void stack_nop(stack_t **head, unsigned int l_num);
-void stack_sub(stack_t **head, unsigned int l_num);
-void stack_div(stack_t **head, unsigned int l_num);
-void stack_mul(stack_t **head, unsigned int l_num);
-void stack_mod(stack_t **head, unsigned int l_num);
-void stack_pchar(stack_t **head, unsigned int l_num);
-void stack_pstr(stack_t **head, unsigned int l_num);
-void stack_queue(stack_t **head, unsigned int l_num);
-void order_stack(stack_t **head, unsigned int l_num);
-FILE *check_open(int argc, char **argv);
-void init(FILE *fd);
+/* from montyparse.c */
+void exitwrap(int exitcode, char *existring, stack_t *top);
 
-#endif /*MONTY_H*/
+/* opstack.c */
+void push(stack_t **top, stack_t **bot, int val, int mode);
+void pop(stack_t **top);
+void swap(stack_t **top, stack_t **bot);
+void rotl(stack_t **top, stack_t **bot);
+void rotr(stack_t **top, stack_t **bot);
+
+/* opprint.c */
+void pall(stack_t **top);
+void pint(stack_t **top);
+void pchar(stack_t **top);
+void pstr(stack_t **top);
+
+/* opmath.c */
+void add(stack_t **top);
+void sub(stack_t **top);
+void mul(stack_t **top);
+void _div(stack_t **top);
+void mod(stack_t **top);
+
+#endif
