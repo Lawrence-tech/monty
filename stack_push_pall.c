@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <limits.h>
+
 /**
   *stack_push - pushes an element to the stack.
   *@head: pointer to the head of the stack.
@@ -14,7 +15,7 @@ void stack_push(stack_t **head, unsigned int l_num)
 {
     long int value;
     char *endptr;
-    stack_t *temp = vars.stack;
+    stack_t *temp = *head;
 
     if (!temp)
     {
