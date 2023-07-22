@@ -1,28 +1,19 @@
 #include "monty.h"
 
 /**
-  *stack_add - adds omly the top two elements of stac.
-  *@head: pointer to the head of stack.
-  *@l_num: the number of line of command.
-  */
-void stack_add(stack_t **head, unsigned int l_num)
-{
-	stack_t *tmp = NULL;
-	int nel = 0;
+ * monty_add - Adds the top two values of a stack_t linked list
+ * @stack: A pointer to the top mode node of a stack_t linked list
+ * @line_number: The current working line number of a Monty bytecodes file
+ */
 
-	tmp = *head;
-	while (tmp)
+void monty_add(stack_t **stack, unsigned int line_number)
+{
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		nel++;
-		tmp = tmp->next;
+		set_op_tok_error(short_stack_error(line_number, "add"));
+		return;
 	}
-	if (nel < 2)
-	{
-		fprintf(stderr, "L%u: can't add, stack too short\n", l_num);
-		free_vars();
-		exit(EXIT_FAILURE);
-	}
-	tmp = (*head)->next;
-	tmp->n += (*head)->n;
-	stack_pop(head, l_num);
+
+	(*stack)->next->next->n += (*stack)->next->n;
+	monty_pop(stack, line_number);
 }
