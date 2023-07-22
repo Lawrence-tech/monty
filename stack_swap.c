@@ -1,30 +1,27 @@
-#include <ctype.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
 #include "monty.h"
 
 /**
-  *stack_swap - swaps the top two elements of the stack.
-  *@head: pointer to the head of the stack.
-  *@l_num: line number of command.
-  */
-void stack_swap(stack_t **head, unsigned int l_num)
-{
-	stack_t *tmp = NULL;
+ * monty_swap - Swaps the top two value elements of a stack_t linked list
+ * @stack: A pointer to the top mode node of a stack_t linked list
+ * @line_number: The current working line number of a Monty bytecodes file.
+ */
 
-	if (*head == NULL || (*head)->next == NULL)
+void monty_swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't swap, stack too short\n", l_num);
-		free_vars();
-		exit(EXIT_FAILURE);
+		set_op_tok_error(short_stack_error(line_number, "swap"));
+		return;
 	}
 
-	tmp = *head;
-	*head = (*head)->next;
-	tmp->next = (*head)->next;
-	tmp->prev = *head;
-	(*head)->next = tmp;
-	(*head)->prev = NULL;
+	tmp = (*stack)->next->next;
+	(*stack)->next->next = tmp->next;
+	(*stack)->next->prev = tmp;
+	if (tmp->next)
+		tmp->next->prev = (*stack)->next;
+	tmp->next = (*stack)->next;
+	tmp->prev = *stack;
+	(*stack)->next = tmp;
 }
-
