@@ -1,23 +1,25 @@
 #include "monty.h"
 
 /**
-  *stack_pchar - print the top ASCII character of linked list.
-  *@head: pointer to the head of the stack.
-  *@l_num: the number line of command.
-  */
-void stack_pchar(stack_t **head, unsigned int l_num)
+ * monty_pchar - Prints the character in the top value
+ *               node of a stack_t linked list
+ * @stack: A pointer to the top mode node of a stack_t linked list
+ * @line_number: The current working line number of a Monty bytecodes file
+ */
+
+void monty_pchar(stack_t **stack, unsigned int line_number)
 {
-	if (head == NULL || *head == NULL)
+	if ((*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%u: can't pchar, stack empty\n", l_num);
-		free_vars();
-		exit(EXIT_FAILURE);
+		set_op_tok_error(pchar_error(line_number, "stack empty"));
+		return;
 	}
-	if ((*head)->n < 0 || (*head)->n >= 128)
+	if ((*stack)->next->n < 0 || (*stack)->next->n > 127)
 	{
-		fprintf(stderr, "L%u: can't pchar, value out of ranger\n", l_num);
-		free_vars();
-		exit(EXIT_FAILURE);
+		set_op_tok_error(pchar_error(line_number,
+					     "value out of range"));
+		return;
 	}
-	printf("%c\n", (*head)->n);
+
+	printf("%c\n", (*stack)->next->n);
 }
