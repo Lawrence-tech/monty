@@ -1,5 +1,6 @@
 #include "monty.h"
 
+#ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 int run_monty(FILE *script_fd);
 
 /**
@@ -15,6 +16,7 @@ int run_monty(FILE *script_fd)
 	size_t len = 0, exit_status = EXIT_SUCCESS;
 	unsigned int line_number = 0, prev_tok_len = 0;
 	void (*op_func)(stack_t**, unsigned int);
+  ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
