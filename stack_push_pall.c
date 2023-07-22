@@ -6,53 +6,81 @@
 #include <errno.h>
 #include <limits.h>
 
+
+void monty_push(stack_t **stack, unsigned int line_number);
+
 /**
-  *stack_push - pushes an element to the stack.
-  *@head: pointer to the head of the stack.
-  *@l_num: line number of the command
-  */
-void stack_push(stack_t **head, unsigned int l_num)
+ * monty_push - Pushes a value to a stack_t linked list
+ * @stack: A pointer to the top mode node of a stack_t linked list
+ * @line_number: The current working line number of a Monty bytecodes file
+ */
+
+void monty_push(stack_t **stack, unsigned int line_number)
 {
-    long int value;
-    char *endptr;
-    stack_t *temp = *head;
+	stack_t *tmp, *new;
+	int i;
 
-    if (!temp)
-    {
-        fprintf(stderr, "L%u: ", l_num);
-        fprintf(stderr, "usage: push integer\n");
-        free_vars();
-        exit(EXIT_FAILURE);
-    }
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+	{
+		set_op_tok_error(malloc_error());
+		return;
+	}
 
-    value = strtol((char *)&(temp->n), &endptr, 10);
-    if (*endptr != '\0' || errno == ERANGE || value < INT_MIN || value > INT_MAX)
-    {
-        fprintf(stderr, "L%u: usage: push integer\n", l_num);
-        free_vars();
-        exit(EXIT_FAILURE);
-    }
+	if (op_toks[1] == NULL)
+	{
+		set_op_tok_error(no_int_error(line_number));
+		return;
+	}
 
-    if (vars.order == 1)
-        add_dnodeint(head, (int)value);
-    else
-        add_dnodeint_end(head, (int)value);
+	for (i = 0; op_toks[1][i]; i++)
+	{
+		if (op_toks[1][i] == '-' && i == 0)
+			continue;
+		if (op_toks[1][i] < '0' || op_toks[1][i] > '9')
+		{
+			set_op_tok_error(no_int_error(line_number));
+			return;
+		}
+	}
+	new->n = atoi(op_toks[1]);
+
+	if (check_mode(*stack) == STACK)
+	{
+		tmp = (*stack)->next;
+		new->prev = *stack;
+		new->next = tmp;
+		if (tmp)
+			tmp->prev = new;
+		(*stack)->next = new;
+	}
+	else
+	{
+		tmp = *stack;
+		while (tmp->next)
+			tmp = tmp->next;
+		new->prev = tmp;
+		new->next = NULL;
+		tmp->next = new;
+	}
 }
 
-/**
-  *stack_pall - prints all the values on the stack, starting from the top.
-  *@head: pointer to the head of the stack.
-  *@l_num: line number of the command.
-  */
-void stack_pall(stack_t **head, unsigned int l_num)
-{
-    stack_t *current = *head;
 
-    (void)l_num;
-    while (current)
-    {
-        printf("%d\n", current->n);
-        current = current->next;
-    }
+/**
+ * monty_pall - Prints the values of a stack_t linked list
+ * @stack: A pointer to the top mode node of a stack_t linked list
+ * @line_number: The current working line number of a Monty bytecodes file
+ */
+
+void monty_pall(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp = (*stack)->next;
+
+	while (tmp)
+	{
+		printf("%d\n", tmp->n);
+		tmp = tmp->next;
+	}
+	(void)line_number;
 }
 
