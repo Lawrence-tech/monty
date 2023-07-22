@@ -1,25 +1,18 @@
-#include <ctype.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
 #include "monty.h"
 
 /**
-  *stack_pint -  prints the value at the top of the stack
-  *@head : pointer to the head of the stack.
-  *@l_num: line number of command
-  */
-void stack_pint(stack_t **head, unsigned int l_num)
+ * monty_pint - Prints the top value of a stack_t linked list
+ * @stack: A pointer to the top mode node of a stack_t linked list
+ * @line_number: The current working line number of a Monty bytecodes file
+ */
+
+void monty_pint(stack_t **stack, unsigned int line_number)
 {
-	if (*head)
+	if ((*stack)->next == NULL)
 	{
-		printf("%d\n", (*head)->n);
+		set_op_tok_error(pint_error(line_number));
+		return;
 	}
-	else
-	{
-		fprintf(stderr, "L%u: can't pint, stack empty\n", l_num);
-		free_vars();
-		exit(EXIT_FAILURE);
-	}
+	printf("%d\n", (*stack)->next->n);
 }
 
