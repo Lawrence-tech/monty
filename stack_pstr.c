@@ -1,20 +1,22 @@
 #include "monty.h"
 
 /**
-  *stack_pstr -  prints the string starting at the top of the stack
-  *@head: head of stack
-  *@l_num: reference line
-  */
-void stack_pstr(stack_t **head, unsigned int l_num)
-{
-	stack_t *tmp;
-	(void)l_num;
+ * monty_pstr - Prints the string contained in a stack_t linked list
+ * @stack: pointer to the top mode node of a stack_t linked list
+ * @line_number: current working line number of a Monty bytecodes file
+ */
 
-	tmp = *head;
-	while (tmp && tmp->n > 0 && tmp->n < 128)
+void monty_pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp = (*stack)->next;
+
+	while (tmp && tmp->n != 0 && (tmp->n > 0 && tmp->n <= 127))
 	{
 		printf("%c", tmp->n);
 		tmp = tmp->next;
 	}
+
 	printf("\n");
+
+	(void)line_number;
 }
